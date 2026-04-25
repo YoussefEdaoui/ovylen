@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ovylen — Eau de Toilette</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8720C;
+    --orange-light: #F5A623;
+    --orange-pale: #FFF4E8;
+    --gold: #C9973A;
+    --dark: #1A1208;
+    --cream: #FAF6F0;
+    --text: #3D2E10;
+    --muted: #9A8060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(250,246,240,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232,114,12,0.12);
+  }
+
+  .logo {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1.5rem;
+    color: var(--dark); text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 32px; height: 32px; background: var(--orange);
+    border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-icon::after {
+    content: ''; width: 12px; height: 12px;
+    background: white; border-radius: 50%;
+    transform: rotate(45deg);
+  }
+
+  nav ul {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  nav a {
+    text-decoration: none; color: var(--text);
+    font-size: 0.875rem; font-weight: 400; letter-spacing: 0.05em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--orange); }
+
+  .nav-cta {
+    background: var(--orange); color: white !important;
+    padding: 0.6rem 1.5rem; border-radius: 50px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--dark) !important; color: white !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; right: -5%; top: 10%;
+    width: 55%; height: 80%;
+    background: radial-gradient(ellipse at center, #FDE8CC 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .hero-text { position: relative; z-index: 2; }
+
+  .hero-label {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--orange);
+    border: 1px solid var(--orange); border-radius: 50px;
+    padding: 0.4rem 1.2rem; margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--dark);
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+
+  .hero h1 em {
+    font-style: italic; color: var(--orange);
+  }
+
+  .hero-sub {
+    margin-top: 1.5rem; max-width: 420px;
+    font-size: 1rem; line-height: 1.7; color: var(--muted);
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-actions {
+    margin-top: 2.5rem; display: flex; gap: 1rem; align-items: center;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--orange); color: white;
+    padding: 0.9rem 2rem; border-radius: 50px;
+    text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--dark); transform: translateY(-2px); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--text); text-decoration: none;
+    font-size: 0.9rem; font-weight: 400;
+    border-bottom: 1px solid var(--muted); padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--orange); border-color: var(--orange); }
+
+  .hero-image {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; align-items: center;
+    animation: floatIn 1s ease 0.4s both;
+  }
+
+  .bottle-wrap {
+    position: relative;
+    width: 300px;
+  }
+
+  .bottle-shadow {
+    position: absolute; bottom: -30px; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 40px;
+    background: radial-gradient(ellipse, rgba(232,114,12,0.25), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .bottle-img {
+    width: 100%; max-width: 280px;
+    filter: drop-shadow(0 30px 60px rgba(201,151,58,0.25));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .badge {
+    position: absolute; top: 20px; right: -20px;
+    width: 80px; height: 80px;
+    background: var(--orange); border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: white; font-size: 0.65rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    text-align: center; line-height: 1.3;
+    box-shadow: 0 8px 24px rgba(232,114,12,0.4);
+    animation: spin 20s linear infinite;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--dark);
+    display: flex; justify-content: center; gap: 4rem;
+    padding: 2rem 4rem;
+  }
+
+  .stat { text-align: center; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 600; color: var(--orange-light);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.75rem; color: rgba(255,255,255,0.5);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 7rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+
+  .section-tag {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: 1rem; display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.2; color: var(--dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    font-size: 0.95rem; line-height: 1.8; color: var(--muted);
+    max-width: 460px;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+    position: relative; overflow: hidden;
+  }
+
+  .about-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--orange), var(--orange-light));
+  }
+
+  .about-card-icon {
+    width: 56px; height: 56px;
+    background: var(--orange-pale);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1rem;
+  }
+
+  .about-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--dark);
+  }
+
+  .about-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+
+  .cards-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+  }
+
+  /* ── BENEFITS ── */
+  .benefits {
+    background: var(--dark);
+    padding: 7rem 4rem;
+    text-align: center;
+  }
+
+  .benefits .section-title { color: white; }
+  .benefits .section-tag { color: var(--orange-light); }
+
+  .benefits-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+
+  .benefit-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 2rem 1.5rem;
+    text-align: left;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+
+  .benefit-card:hover {
+    background: rgba(232,114,12,0.1);
+    border-color: rgba(232,114,12,0.3);
+    transform: translateY(-4px);
+  }
+
+  .benefit-icon {
+    font-size: 1.8rem; margin-bottom: 1rem;
+  }
+
+  .benefit-card h3 {
+    font-size: 1rem; font-weight: 600; color: var(--orange-light);
+    margin-bottom: 0.6rem;
+  }
+
+  .benefit-card p {
+    font-size: 0.825rem; color: rgba(255,255,255,0.45); line-height: 1.6;
+  }
+
+  /* ── PRODUCT ── */
+  .product {
+    padding: 7rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+
+  .product-img-wrap {
+    background: linear-gradient(135deg, #FDE8CC, #FAF0E0);
+    border-radius: 24px; padding: 4rem;
+    display: flex; justify-content: center;
+    box-shadow: 0 30px 80px rgba(201,151,58,0.15);
+  }
+
+  .product-img-wrap img {
+    width: 180px;
+    filter: drop-shadow(0 20px 40px rgba(201,151,58,0.3));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .product-detail-label {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem; color: var(--muted); margin: 0.4rem 0;
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  .product-detail-label::before {
+    content: ''; width: 20px; height: 1px; background: var(--orange);
+  }
+
+  .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: var(--dark);
+    margin: 1rem 0;
+  }
+
+  .price span { font-size: 1.2rem; vertical-align: super; color: var(--orange); }
+
+  .product-meta {
+    display: flex; gap: 1.5rem; margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    background: var(--orange-pale); border: 1px solid rgba(232,114,12,0.2);
+    border-radius: 50px; padding: 0.4rem 1rem;
+    font-size: 0.8rem; color: var(--orange); font-weight: 500;
+  }
+
+  .product-cta {
+    display: flex; gap: 1rem; margin-top: 2rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 3rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-logo { color: white; font-size: 1.3rem; font-weight: 600; }
+  .footer-copy { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a {
+    color: rgba(255,255,255,0.4); text-decoration: none;
+    font-size: 0.8rem; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--orange); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes floatIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; text-align: center; }
+    .hero::before { display: none; }
+    .hero-sub, .btn-secondary { margin: 0 auto; }
+    .hero-actions { justify-content: center; }
+    .hero-image { margin-top: 2rem; }
+    .bottle-img { max-width: 200px; }
+    .stats-bar { gap: 2rem; padding: 2rem 1.5rem; flex-wrap: wrap; }
+    .about, .product { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2.5rem; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .benefits { padding: 4rem 1.5rem; }
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .product-img-wrap img { width: 140px; }
+    .badge { right: 0; }
+  }
+
+  @media (max-width: 500px) {
+    .benefits-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.8rem; }
+    .hero-actions { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon"></div>
+    Ovylen
+  </a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#benefits">Benefits</a></li>
+    <li><a href="#product">Shop</a></li>
+  </ul>
+  <a href="#product" class="nav-cta">Shop Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-label">✦ Eau de Toilette · 100ml</span>
+    <h1>The Art of<br><em>Unforgettable</em><br>Fragrance</h1>
+    <p class="hero-sub">
+      Ovylen blends rare essences into a signature scent that lingers long after you leave the room. Crafted for those who make an impression.
+    </p>
+    <div class="hero-actions">
+      <a href="#product" class="btn-primary">
+        <span>Discover Now</span>
+        <span>→</span>
+      </a>
+      <a href="#about" class="btn-secondary">Our Story ↓</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="bottle-wrap">
+      <!-- SVG perfume bottle illustration -->
+      <svg class="bottle-img" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Cap -->
+        <polygon points="70,60 130,60 120,30 80,30" fill="url(#capGrad)" rx="4"/>
+        <!-- Diamond top -->
+        <polygon points="100,5 125,30 100,50 75,30" fill="url(#diamondGrad)" opacity="0.9"/>
+        <polygon points="100,5 125,30 100,20" fill="rgba(255,255,255,0.4)"/>
+        <!-- Neck -->
+        <rect x="82" y="55" width="36" height="30" rx="4" fill="url(#neckGrad)"/>
+        <!-- Bow -->
+        <ellipse cx="80" cy="72" rx="18" ry="10" fill="#E8720C" opacity="0.85" transform="rotate(-15 80 72)"/>
+        <ellipse cx="120" cy="72" rx="18" ry="10" fill="#D4620A" opacity="0.85" transform="rotate(15 120 72)"/>
+        <ellipse cx="100" cy="72" rx="8" ry="8" fill="#E8720C"/>
+        <!-- Body -->
+        <rect x="40" y="82" width="120" height="170" rx="18" fill="url(#bodyGrad)"/>
+        <!-- Label -->
+        <rect x="52" y="100" width="96" height="120" rx="8" fill="rgba(255,255,255,0.92)"/>
+        <!-- Label content -->
+        <text x="100" y="125" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="600" fill="#1A1208">Ovylen</text>
+        <line x1="60" y1="130" x2="140" y2="130" stroke="#E8720C" stroke-width="1" opacity="0.4"/>
+        <text x="100" y="148" text-anchor="middle" font-family="Outfit,sans-serif" font-size="6" fill="#9A8060">EAU DE TOILETTE</text>
+        <text x="100" y="158" text-anchor="middle" font-family="Outfit,sans-serif" font-size="6" fill="#E8720C">100ml e</text>
+        <!-- Base shine -->
+        <rect x="40" y="238" width="120" height="14" rx="0 0 18 18" fill="rgba(201,151,58,0.2)"/>
+        <defs>
+          <linearGradient id="bodyGrad" x1="40" y1="82" x2="160" y2="252" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#F5E6C0" stop-opacity="0.9"/>
+            <stop offset="40%" stop-color="#EDD99A" stop-opacity="0.75"/>
+            <stop offset="100%" stop-color="#C9973A" stop-opacity="0.6"/>
+          </linearGradient>
+          <linearGradient id="capGrad" x1="70" y1="30" x2="130" y2="60" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#C9973A"/>
+            <stop offset="100%" stop-color="#8B6520"/>
+          </linearGradient>
+          <linearGradient id="neckGrad" x1="82" y1="55" x2="118" y2="85" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#D4AA50"/>
+            <stop offset="100%" stop-color="#9A7030"/>
+          </linearGradient>
+          <linearGradient id="diamondGrad" x1="75" y1="5" x2="125" y2="50" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#E8E8F0"/>
+            <stop offset="100%" stop-color="#B8B8CC"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="bottle-shadow"></div>
+      <div class="badge">New<br>Arrival<br>2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-num">50+</span>
+    <span class="stat-label">Scent Notes</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">12h</span>
+    <span class="stat-label">Lasting Power</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">98%</span>
+    <span class="stat-label">Satisfaction Rate</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">40+</span>
+    <span class="stat-label">Countries Shipped</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div>
+    <span class="section-tag">About Us</span>
+    <h2 class="section-title">Where Luxury Meets<br>Your Skin</h2>
+    <p class="section-body">
+      Ovylen was born from a passion for olfactory artistry. We source the finest ingredients from around the globe — rare florals, aged woods, and exotic resins — to create fragrances that become a part of who you are.
+    </p>
+    <p class="section-body" style="margin-top:1rem;">
+      Every bottle is a work of art. Every scent, a story waiting to be told on your skin.
+    </p>
+    <a href="#product" class="btn-primary" style="margin-top:2rem; display:inline-flex;">
+      <span>Explore Collection</span><span>→</span>
+    </a>
+  </div>
+  <div class="about-visual">
+    <div class="cards-grid">
+      <div class="about-card">
+        <div class="about-card-icon">🌺</div>
+        <h3>Floral Heart</h3>
+        <p>Delicate jasmine and rose petals form the soul of every Ovylen fragrance.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🪵</div>
+        <h3>Woody Base</h3>
+        <p>Aged cedarwood and sandalwood anchor each scent with depth and warmth.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">✨</div>
+        <h3>Fresh Top</h3>
+        <p>Bright citrus and bergamot open each bottle with an unforgettable first impression.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🌿</div>
+        <h3>Natural Extracts</h3>
+        <p>No synthetic shortcuts — only pure, ethically sourced botanical extracts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits" id="benefits">
+  <span class="section-tag">Our Benefits</span>
+  <h2 class="section-title">Why Choose Ovylen?</h2>
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">💎</div>
+      <h3>Pricing</h3>
+      <p>Luxury craftsmanship at accessible price points. Premium fragrance shouldn't be out of reach for those who appreciate the finer things.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">💰</div>
+      <h3>Savings</h3>
+      <p>Exclusive member discounts and bundle offers mean your favorite scent costs even less when you commit to it fully.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🎨</div>
+      <h3>Variety</h3>
+      <p>From light daytime florals to deep evening orientals, our collection covers every mood, season, and occasion.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🤝</div>
+      <h3>Support</h3>
+      <p>Our fragrance experts are here to guide your scent journey — from first-time buyers to seasoned collectors.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section class="product" id="product">
+  <div class="product-img-wrap">
+    <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:180px;filter:drop-shadow(0 20px 40px rgba(201,151,58,0.3));animation:float 4s ease-in-out infinite">
+      <polygon points="70,60 130,60 120,30 80,30" fill="url(#capGrad2)" rx="4"/>
+      <polygon points="100,5 125,30 100,50 75,30" fill="url(#diamondGrad2)" opacity="0.9"/>
+      <polygon points="100,5 125,30 100,20" fill="rgba(255,255,255,0.4)"/>
+      <rect x="82" y="55" width="36" height="30" rx="4" fill="url(#neckGrad2)"/>
+      <ellipse cx="80" cy="72" rx="18" ry="10" fill="#E8720C" opacity="0.85" transform="rotate(-15 80 72)"/>
+      <ellipse cx="120" cy="72" rx="18" ry="10" fill="#D4620A" opacity="0.85" transform="rotate(15 120 72)"/>
+      <ellipse cx="100" cy="72" rx="8" ry="8" fill="#E8720C"/>
+      <rect x="40" y="82" width="120" height="170" rx="18" fill="url(#bodyGrad2)"/>
+      <rect x="52" y="100" width="96" height="120" rx="8" fill="rgba(255,255,255,0.92)"/>
+      <text x="100" y="125" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="600" fill="#1A1208">Ovylen</text>
+      <line x1="60" y1="130" x2="140" y2="130" stroke="#E8720C" stroke-width="1" opacity="0.4"/>
+      <text x="100" y="148" text-anchor="middle" font-family="Outfit,sans-serif" font-size="6" fill="#9A8060">EAU DE TOILETTE</text>
+      <text x="100" y="158" text-anchor="middle" font-family="Outfit,sans-serif" font-size="6" fill="#E8720C">100ml e</text>
+      <defs>
+        <linearGradient id="bodyGrad2" x1="40" y1="82" x2="160" y2="252" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#F5E6C0" stop-opacity="0.9"/>
+          <stop offset="40%" stop-color="#EDD99A" stop-opacity="0.75"/>
+          <stop offset="100%" stop-color="#C9973A" stop-opacity="0.6"/>
+        </linearGradient>
+        <linearGradient id="capGrad2" x1="70" y1="30" x2="130" y2="60" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#C9973A"/><stop offset="100%" stop-color="#8B6520"/>
+        </linearGradient>
+        <linearGradient id="neckGrad2" x1="82" y1="55" x2="118" y2="85" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#D4AA50"/><stop offset="100%" stop-color="#9A7030"/>
+        </linearGradient>
+        <linearGradient id="diamondGrad2" x1="75" y1="5" x2="125" y2="50" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#E8E8F0"/><stop offset="100%" stop-color="#B8B8CC"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <div>
+    <span class="section-tag">Signature Fragrance</span>
+    <h2 class="section-title">Ovylen<br>Eau de Toilette</h2>
+    <div class="product-detail-label">100ml · Long-lasting formula</div>
+    <div class="price"><span>$</span>89</div>
+    <div class="product-meta">
+      <span class="meta-chip">🌸 Floral</span>
+      <span class="meta-chip">🪵 Woody</span>
+      <span class="meta-chip">🍋 Citrus</span>
+      <span class="meta-chip">12h Wear</span>
+    </div>
+    <p style="font-size:0.9rem;color:var(--muted);line-height:1.7;max-width:420px;">
+      A harmonious blend of jasmine, bergamot, and aged sandalwood. Spray on pulse points and let Ovylen write your signature throughout the day.
+    </p>
+    <div class="product-cta">
+      <a href="#" class="btn-primary">
+        <span>Add to Cart</span><span>🛒</span>
+      </a>
+      <a href="#" class="btn-secondary">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div style="display:flex;align-items:center;gap:0.5rem;">
+      <div class="logo-icon" style="width:24px;height:24px;"></div>
+      <span>Ovylen</span>
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+    <a href="#">Instagram</a>
+  </div>
+  <p class="footer-copy">© 2025 Ovylen. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
